@@ -2,7 +2,7 @@
 
 # Directories
 CLI_DIR := cli
-EXPERIMENT_DIR := experiment
+EXPERIMENT_DIR := experiments
 COMPOSED_DIR := composed
 
 # Targets for CLI apps
@@ -24,11 +24,11 @@ $(CLI_TARGETS):
 # Build all experiments (each .c file becomes an executable)
 .PHONY: experiments
 experiments:
-	@mkdir -p bin
+	@mkdir -p bin/experiments
 	@for file in $(wildcard $(EXPERIMENT_DIR)/*.c); do \
-  		name=$$(vasename $$file .c); \
+  		name=$$(basename $$file .c); \
   		echo "Compiling $$file -> bin/$$name"; \
-		gcc -o bin/$${target} $${file}; \
+		gcc -o bin/experiments/$${name} $${file}; \
 	done
 
 # Build all composed apps (each has its own Makefile)
